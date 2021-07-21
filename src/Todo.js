@@ -5,6 +5,22 @@ function TodoApp () {
 
     const handleChange = (e) => {
         setState({text: e.target.value});
+    };
+
+    const handleClick = (e) => {
+        e.preventDefault();
+        if (state.text.length === 0) {
+            return;
+        }
+        const newItem = {
+            text: state.text,
+            id: Date.now()
+        };
+
+        setState(state => ({
+            items: state.items.concat(newItem),
+            text: ''
+        }));
     }
 
 
@@ -16,7 +32,7 @@ function TodoApp () {
                 <label htmlFor='new-todo'>What needs to be done?</label>
                 <input id='new-todo' onChange={handleChange} value={state.text} />
             </form>
-            <button>Add Number</button>
+            <button onClick={handleClick}>Add Number {state.items.length + 1}</button>
         </div>
     )
 }
