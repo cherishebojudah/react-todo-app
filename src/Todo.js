@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import TodoList from './TodoList';
 
-function TodoApp () {
+function TodoApp (props) {
     const [state, setState] = useState({items: [], text: ''});
 
     const handleChange = (e) => {
@@ -25,14 +26,16 @@ function TodoApp () {
 
 
     return(
+    
         <div>
             <h3>TODO</h3>
-            <p>Hey, let's make a todo list!</p>
-            <form >
+            <p>Hey, make a todo list!</p>
+            <TodoList props={props.state.items}/>
+            <form onSubmit={handleClick}>
                 <label htmlFor='new-todo'>What needs to be done?</label>
                 <input id='new-todo' onChange={handleChange} value={state.text} />
             </form>
-            <button onClick={handleClick}>Add Number {state.items.length + 1}</button>
+            <button>Add Number {props.state.items.length + 1}</button>
         </div>
     )
 }
